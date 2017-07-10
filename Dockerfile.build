@@ -1,0 +1,26 @@
+FROM alpine:3.6
+
+MAINTAINER Bryan Hunt <admin@binarytemple.co.uk>
+
+ENV HOME=/opt/app/ TERM=xterm
+
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/latest-stable/community' >> /etc/apk/repositories
+
+RUN apk --update add -X latest-stable ncurses-libs erlang-syntax-tools erlang-crypto make elixir=1.4.2-r0 && rm -rf /var/cache/apk/*
+
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
+WORKDIR /opt/app
+
+ENV MIX_ENV=prod
+
+# Cache elixir deps
+RUN mkdir config
+COPY config/* config/
+COPY mix.exs mix.lock ./
+RUN mix do deps.get, deps.compile
+
+COPY . .
+
+RUN mix release --env=prod --verbose
