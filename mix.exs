@@ -19,7 +19,7 @@ defmodule ElixirPlugPoc.Mixfile do
   
   def applications(_) do
     [ 
-    #      mod: {FizzBuzz, []},
+      mod: {FizzBuzzApp, []},
       applications: [
         :logger, 
         :httpoison, 

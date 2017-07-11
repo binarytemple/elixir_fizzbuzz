@@ -1,4 +1,4 @@
-defmodule HelloWorld do
+defmodule FizzBuzzApp do
   use Application
 
   def start(_type, _args) do
@@ -26,7 +26,7 @@ defmodule FizzBuzzPlug do
       ret = """
       Available endpoints:
 
-      GET /fizzbuzz/:num"
+      GET /fizzbuzz/:num
       """
       conn |> send_resp(500,ret)
 	end
