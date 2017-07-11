@@ -12,5 +12,5 @@ FizzBuzz implemented as a REST endpoint using [Plug](https://github.com/elixir-l
 ### Building and running a docker release
 
 ```
-mix docker.build && mix docker.release && docker run -it --rm binarytemple/fizzbuzz:release foreground
+mix docker.build && mix docker.release && docker run -it --rm -p4000:4000 binarytemple/fizzbuzz:release foreground
 ```
